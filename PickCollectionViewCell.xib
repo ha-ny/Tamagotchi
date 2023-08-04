@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PickCollectionViewCell" id="gTV-IL-0wX" customClass="PickCollectionViewCell" customModule="Tamagotchi" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="113" height="137"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="113" height="137"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbO-cL-Gua">
+                        <rect key="frame" x="4" y="113" width="105" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="C95-sv-nsb"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="99v-Uw-a2Z">
+                        <rect key="frame" x="4" y="4" width="105" height="105"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="99v-Uw-a2Z" secondAttribute="height" multiplier="1:1" id="bch-qR-cb4"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="sbO-cL-Gua" secondAttribute="trailing" constant="4" id="3gb-I6-Et6"/>
+                <constraint firstItem="sbO-cL-Gua" firstAttribute="top" secondItem="99v-Uw-a2Z" secondAttribute="bottom" constant="4" id="C80-YN-7mJ"/>
+                <constraint firstAttribute="trailing" secondItem="99v-Uw-a2Z" secondAttribute="trailing" constant="4" id="CwD-Pv-OSE"/>
+                <constraint firstItem="99v-Uw-a2Z" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="FdD-Pl-psd"/>
+                <constraint firstItem="sbO-cL-Gua" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="UY3-yk-iKu"/>
+                <constraint firstAttribute="bottom" secondItem="sbO-cL-Gua" secondAttribute="bottom" constant="4" id="mmo-bT-BbB"/>
+                <constraint firstItem="99v-Uw-a2Z" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="yvS-8A-mvP"/>
+            </constraints>
+            <size key="customSize" width="113" height="137"/>
+            <connections>
+                <outlet property="PickimageView" destination="99v-Uw-a2Z" id="EC0-0O-YKt"/>
+                <outlet property="pickNameLabel" destination="sbO-cL-Gua" id="clK-sU-E8J"/>
+                <outlet property="pickimageView" destination="99v-Uw-a2Z" id="wak-ye-1U5"/>
+            </connections>
+            <point key="canvasLocation" x="180.91603053435114" y="22.887323943661972"/>
+        </collectionViewCell>
+    </objects>
+</document>
