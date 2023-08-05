@@ -11,9 +11,7 @@ class SettingViewController: UIViewController{
 
     @IBOutlet var settingTableView: UITableView!
     
-    let identifierSettingCell = "SettingViewControllerCell"
-    let identifierChangeName = "ChangeNameViewController"
-    let identifierPickView = "PickViewController"
+    static let identifier = "SettingViewController"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,25 +30,25 @@ class SettingViewController: UIViewController{
 extension SettingViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return InfoTamagotchi().menuList.count
+        return InfoTamagotchi.menuList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let data = InfoTamagotchi().menuList[indexPath.row]
+        let data = InfoTamagotchi.menuList[indexPath.row]
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifierSettingCell)!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SettingViewControllerCell")!
         cell.imageView?.image = data.image
         cell.textLabel?.text = data.title
         cell.detailTextLabel?.text = data.detail
-        cell.detailTextLabel?.textColor = InfoTamagotchi().boldFontColor
-        cell.tintColor = InfoTamagotchi().boldFontColor
-        cell.backgroundColor = InfoTamagotchi().backColor
+        cell.detailTextLabel?.textColor = InfoTamagotchi.boldFontColor
+        cell.tintColor = InfoTamagotchi.boldFontColor
+        cell.backgroundColor = InfoTamagotchi.backColor
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch InfoTamagotchi().menuList[indexPath.row].swichFunc{
+        switch InfoTamagotchi.menuList[indexPath.row].swichFunc{
         case .changeName: changeName()
         case .pickViewShow: pickViewShow()
         case .alertDateReset: alertDateReset()
@@ -61,14 +59,14 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource{
 extension SettingViewController{
     
     func changeName(){
-        let vc = storyboard?.instantiateViewController(identifier: identifierChangeName) as! ChangeNameViewController
+        let vc = storyboard?.instantiateViewController(identifier: ChangeNameViewController.identifier) as! ChangeNameViewController
         navigationController?.pushViewController(vc, animated: true)
     }
     
     func pickViewShow(){
 
         let sb = UIStoryboard(name: "Pick", bundle: nil)
-        let vc = sb.instantiateViewController(identifier: identifierPickView) as! PickViewController
+        let vc = sb.instantiateViewController(identifier: PickViewController.identifier) as! PickViewController
         vc.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -90,12 +88,12 @@ extension SettingViewController{
 extension SettingViewController{
     
     func designSetting(){
-        view.backgroundColor = InfoTamagotchi().backColor
+        view.backgroundColor = InfoTamagotchi.backColor
         
-        navigationController?.navigationBar.tintColor = InfoTamagotchi().boldFontColor
+        navigationController?.navigationBar.tintColor = InfoTamagotchi.boldFontColor
         navigationController?.navigationBar.topItem?.title = ""
         
-        settingTableView.backgroundColor = InfoTamagotchi().backColor
-        settingTableView.layer.borderColor = InfoTamagotchi().boldFontColor.cgColor
+        settingTableView.backgroundColor = InfoTamagotchi.backColor
+        settingTableView.layer.borderColor = InfoTamagotchi.boldFontColor.cgColor
     }
 }

@@ -16,6 +16,8 @@ class PopupViewController: UIViewController {
     @IBOutlet var pop_CancelButton: UIButton!
     @IBOutlet var pop_OkButton: UIButton!
     
+    static let identifier = "PopupViewController"
+    
     var pop_Image: UIImage!
     var pop_Name: String = ""
     var pop_Introduce: String = ""
@@ -60,25 +62,25 @@ extension PopupViewController{
         
         view.layer.backgroundColor = (UIColor.white.cgColor).copy(alpha: 0.5)
         
-        pop_View.backgroundColor = InfoTamagotchi().backColor
+        pop_View.backgroundColor = InfoTamagotchi.backColor
         pop_View.layer.cornerRadius = 10
-        pop_TextView.backgroundColor = InfoTamagotchi().backColor
-        pop_TextView.textColor = InfoTamagotchi().boldFontColor
+        pop_TextView.backgroundColor = InfoTamagotchi.backColor
+        pop_TextView.textColor = InfoTamagotchi.boldFontColor
         pop_NameLabel.font = pop_NameLabel.font.withSize(13)
   
         
         pop_NameLabel.font = pop_NameLabel.font.withSize(14)
-        pop_NameLabel.textColor = InfoTamagotchi().boldFontColor
+        pop_NameLabel.textColor = InfoTamagotchi.boldFontColor
         pop_NameLabel.layer.borderWidth = 1
-        pop_NameLabel.layer.borderColor = InfoTamagotchi().boldFontColor.cgColor
+        pop_NameLabel.layer.borderColor = InfoTamagotchi.boldFontColor.cgColor
         pop_NameLabel.layer.cornerRadius = 4
         
         pop_CancelButton.setTitle("취소", for: .normal)
-        pop_CancelButton.setTitleColor(InfoTamagotchi().boldFontColor, for: .normal)
+        pop_CancelButton.setTitleColor(InfoTamagotchi.boldFontColor, for: .normal)
         pop_CancelButton.setTitleColor(.darkGray, for: .highlighted)
         pop_CancelButton.backgroundColor = .systemGray5
         pop_OkButton.setTitle("입양", for: .normal)
-        pop_OkButton.setTitleColor(InfoTamagotchi().boldFontColor, for: .normal)
+        pop_OkButton.setTitleColor(InfoTamagotchi.boldFontColor, for: .normal)
         pop_OkButton.setTitleColor(.darkGray, for: .highlighted)
     }
 }

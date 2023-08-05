@@ -11,7 +11,7 @@ class MainViewController: UIViewController {
     
     @IBOutlet var bubbleImageView: UIImageView!
 
-    let identifierSettingView = "SettingViewController"
+    static let identifier = "MainViewController"
     
     override func viewDidLoad(){
         super.viewDidLoad()
@@ -26,7 +26,7 @@ class MainViewController: UIViewController {
     }
     
     @objc func profileButtonClick(){
-        let vc = storyboard?.instantiateViewController(identifier: identifierSettingView) as! SettingViewController
+        let vc = storyboard?.instantiateViewController(identifier: SettingViewController.identifier) as! SettingViewController
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -35,10 +35,10 @@ extension MainViewController{
     
     func designSetting(){
         
-        view.backgroundColor = InfoTamagotchi().backColor
+        view.backgroundColor = InfoTamagotchi.backColor
         bubbleImageView.image = UIImage(named: "bubble")
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.crop.circle"), style: .plain, target: self, action: #selector(profileButtonClick))
-        navigationItem.rightBarButtonItem?.tintColor = InfoTamagotchi().boldFontColor
+        navigationItem.rightBarButtonItem?.tintColor = InfoTamagotchi.boldFontColor
     }
 }

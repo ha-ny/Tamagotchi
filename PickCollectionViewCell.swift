@@ -12,6 +12,8 @@ class PickCollectionViewCell: UICollectionViewCell {
     @IBOutlet var pickimageView: UIImageView!
     @IBOutlet var pickNameLabel: UILabel!
     
+    static let identifier = "PickCollectionViewCell"
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         designLabel()
@@ -25,7 +27,7 @@ class PickCollectionViewCell: UICollectionViewCell {
             return
         }
         
-        let data = InfoTamagotchi().characterTamagotchi[indexRow]
+        let data = InfoTamagotchi.characterTamagotchi[indexRow]
         pickNameLabel.text = data.name
         pickimageView.image = data.image
     }

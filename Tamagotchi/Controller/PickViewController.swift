@@ -10,15 +10,14 @@ import UIKit
 class PickViewController: UIViewController {
     
     @IBOutlet var pickCollectionView: UICollectionView!
-    
-    let identifierCell = "PickCollectionViewCell"
-    let identifierPopupView = "PopupViewController"
+
+    static let identifier = "PickViewController"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let nib = UINib(nibName: identifierCell, bundle: nil)
-        pickCollectionView.register(nib, forCellWithReuseIdentifier: identifierCell)
+        let nib = UINib(nibName: PickCollectionViewCell.identifier, bundle: nil)
+        pickCollectionView.register(nib, forCellWithReuseIdentifier: PickCollectionViewCell.identifier)
         
         title = "다마고치 선택하기"
         pickCollectionView.delegate = self
@@ -35,15 +34,15 @@ extension PickViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = pickCollectionView.dequeueReusableCell(withReuseIdentifier: identifierCell, for: indexPath) as! PickCollectionViewCell
+        let cell = pickCollectionView.dequeueReusableCell(withReuseIdentifier: PickCollectionViewCell.identifier, for: indexPath) as! PickCollectionViewCell
         cell.settingView(indexPath.row)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let data = InfoTamagotchi().characterTamagotchi[indexPath.row]
-        let vc = storyboard?.instantiateViewController(identifier: identifierPopupView) as! PopupViewController
+        let data = InfoTamagotchi.characterTamagotchi[indexPath.row]
+        let vc = storyboard?.instantiateViewController(identifier: PopupViewController.identifier) as! PopupViewController
         vc.modalPresentationStyle = .overFullScreen
         vc.pop_Image = data.image
         vc.pop_Name = data.name
@@ -55,7 +54,8 @@ extension PickViewController: UICollectionViewDataSource, UICollectionViewDelega
 extension PickViewController{
 
     func designController(){
-        view.backgroundColor = InfoTamagotchi().backColor
+
+        view.backgroundColor = InfoTamagotchi.backColor
 
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 10
@@ -66,6 +66,6 @@ extension PickViewController{
         layout.minimumInteritemSpacing = spacing
         layout.scrollDirection = .vertical
         pickCollectionView.collectionViewLayout = layout
-        pickCollectionView.backgroundColor = InfoTamagotchi().backColor
+        pickCollectionView.backgroundColor = InfoTamagotchi.backColor
     }
 }

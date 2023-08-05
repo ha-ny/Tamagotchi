@@ -11,6 +11,8 @@ class ChangeNameViewController: UIViewController {
     
     @IBOutlet var nameTextField: UITextField!
     
+    static let identifier = "ChangeNameViewController"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         designSetting()
@@ -36,15 +38,15 @@ class ChangeNameViewController: UIViewController {
 extension ChangeNameViewController{
     
     func designSetting(){
-        view.backgroundColor = InfoTamagotchi().backColor
+        view.backgroundColor = InfoTamagotchi.backColor
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClick))
-        navigationItem.rightBarButtonItem?.tintColor = InfoTamagotchi().boldFontColor
-        navigationController?.navigationBar.tintColor = InfoTamagotchi().boldFontColor
+        navigationItem.rightBarButtonItem?.tintColor = InfoTamagotchi.boldFontColor
+        navigationController?.navigationBar.tintColor = InfoTamagotchi.boldFontColor
         
-        nameTextField.backgroundColor = InfoTamagotchi().backColor
-        nameTextField.textColor = InfoTamagotchi().boldFontColor
-        nameTextField.placeholder = "대장님의 새로운 이름이 궁금해요!"
+        nameTextField.backgroundColor = InfoTamagotchi.backColor
+        nameTextField.textColor = InfoTamagotchi.boldFontColor
+        nameTextField.placeholder = "대장님의 이름이 궁금해요!"
     }
     
     func alertShow(title: String, message: String, isExit: Bool = false){
