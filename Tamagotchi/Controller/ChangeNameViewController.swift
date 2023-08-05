@@ -22,6 +22,7 @@ class ChangeNameViewController: UIViewController {
     @objc func saveButtonClick(){
         if  6 >= nameTextField.text!.count && nameTextField.text!.count >= 2{
             UserDefaults.standard.set(nameTextField.text, forKey: "name")
+            view.endEditing(true)
             alertShow(title: "성공", message: "\(nameTextField.text!)\n다마고치는 기억력이 좋답니다", isExit: true)
         }else
         {
