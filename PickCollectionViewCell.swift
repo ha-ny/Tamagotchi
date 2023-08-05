@@ -25,9 +25,9 @@ class PickCollectionViewCell: UICollectionViewCell {
             return
         }
         
-        pickNameLabel.text =  characterTamagotchi[indexRow].name
-        print(characterTamagotchi[indexRow].name)
-        pickimageView.image = UIImage(named: characterTamagotchi[indexRow].imageName)
+        let data = InfoTamagotchi().characterTamagotchi[indexRow]
+        pickNameLabel.text = data.name
+        pickimageView.image = data.image
     }
     
     func designLabel(){

@@ -16,16 +16,15 @@ class PopupViewController: UIViewController {
     @IBOutlet var pop_CancelButton: UIButton!
     @IBOutlet var pop_OkButton: UIButton!
     
-    var pop_ImageName: String = ""
+    var pop_Image: UIImage!
     var pop_Name: String = ""
     var pop_Introduce: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         designSetting()
-        
-        view.layer.backgroundColor =  (UIColor.white.cgColor).copy(alpha: 0.5)
-        pop_ImageView.image = UIImage(named: pop_ImageName)
+
+        pop_ImageView.image = pop_Image
         pop_NameLabel.text = pop_Name
         pop_TextView.text = pop_Introduce
     }
@@ -35,9 +34,21 @@ class PopupViewController: UIViewController {
     }
     
     @IBAction func okButtonClick(_ sender: UIButton) {
-        //메인화면
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDelegate = windowScene?.delegate as? SceneDelegate
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(identifier: "MainViewController") as! MainViewController
+        let nav = UINavigationController(rootViewController: vc)
+
+        UserDefaults.standard.set(true, forKey: "isLaunched")
+        
+        if UserDefaults.standard.string(forKey: "name") == nil{
+            UserDefaults.standard.set("대장님", forKey: "name")
+        }
+
+        sceneDelegate?.window?.rootViewController = nav
+        sceneDelegate?.window?.makeKeyAndVisible()
     }
-    
 }
 
 
@@ -45,28 +56,27 @@ extension PopupViewController{
     
     func designSetting(){
         
-        let backColor = UIColor(red: 245/255, green: 252/255, blue: 252/255, alpha: 1)
-        let boldFontColor = UIColor(red: 77/255, green: 106/255, blue: 120/255, alpha: 1)
+        view.layer.backgroundColor = (UIColor.white.cgColor).copy(alpha: 0.5)
         
-        pop_View.backgroundColor = backColor
+        pop_View.backgroundColor = InfoTamagotchi().backColor
         pop_View.layer.cornerRadius = 10
-        pop_TextView.backgroundColor = backColor
-        pop_TextView.textColor = boldFontColor
+        pop_TextView.backgroundColor = InfoTamagotchi().backColor
+        pop_TextView.textColor = InfoTamagotchi().boldFontColor
         pop_NameLabel.font = pop_NameLabel.font.withSize(13)
   
         
         pop_NameLabel.font = pop_NameLabel.font.withSize(14)
-        pop_NameLabel.textColor = boldFontColor
+        pop_NameLabel.textColor = InfoTamagotchi().boldFontColor
         pop_NameLabel.layer.borderWidth = 1
-        pop_NameLabel.layer.borderColor = boldFontColor.cgColor
+        pop_NameLabel.layer.borderColor = InfoTamagotchi().boldFontColor.cgColor
         pop_NameLabel.layer.cornerRadius = 4
         
         pop_CancelButton.setTitle("취소", for: .normal)
-        pop_CancelButton.setTitleColor(boldFontColor, for: .normal)
+        pop_CancelButton.setTitleColor(InfoTamagotchi().boldFontColor, for: .normal)
         pop_CancelButton.setTitleColor(.darkGray, for: .highlighted)
         pop_CancelButton.backgroundColor = .systemGray5
         pop_OkButton.setTitle("입양", for: .normal)
-        pop_OkButton.setTitleColor(boldFontColor, for: .normal)
+        pop_OkButton.setTitleColor(InfoTamagotchi().boldFontColor, for: .normal)
         pop_OkButton.setTitleColor(.darkGray, for: .highlighted)
     }
 }

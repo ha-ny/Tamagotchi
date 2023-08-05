@@ -165,6 +165,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PqD-Qc-tpU"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Bfa-0c-g5e" firstAttribute="leading" secondItem="PqD-Qc-tpU" secondAttribute="leading" constant="35" id="CPK-M5-JTQ"/>
                             <constraint firstItem="Bfa-0c-g5e" firstAttribute="top" secondItem="PqD-Qc-tpU" secondAttribute="top" constant="130" id="Mr0-4x-Iim"/>

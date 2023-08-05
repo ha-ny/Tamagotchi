@@ -41,21 +41,21 @@ extension PickViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let data = InfoTamagotchi().characterTamagotchi[indexPath.row]
         let vc = storyboard?.instantiateViewController(identifier: identifierPopupView) as! PopupViewController
         vc.modalPresentationStyle = .overFullScreen
-        vc.pop_ImageName = characterTamagotchi[indexPath.row].imageName
-        vc.pop_Name = characterTamagotchi[indexPath.row].name
-        vc.pop_Introduce = characterTamagotchi[indexPath.row].introduce + "\n레벨이 오를 수록 성장하는 걸 볼 수 있어\n10레벨이 되면 어른이 된거야"
+        vc.pop_Image = data.image
+        vc.pop_Name = data.name
+        vc.pop_Introduce = data.introduce + "\n레벨이 오를 수록 성장하는 걸 볼 수 있어\n10레벨이 되면 어른이 된거야"
         present(vc, animated: true)
     }
 }
 
 extension PickViewController{
-    
+
     func designController(){
-        
-        let backColor = UIColor(red: 245/255, green: 252/255, blue: 252/255, alpha: 1)
-        view.backgroundColor = backColor
+        view.backgroundColor = InfoTamagotchi().backColor
 
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 10
@@ -66,6 +66,6 @@ extension PickViewController{
         layout.minimumInteritemSpacing = spacing
         layout.scrollDirection = .vertical
         pickCollectionView.collectionViewLayout = layout
-        pickCollectionView.backgroundColor = backColor
+        pickCollectionView.backgroundColor = InfoTamagotchi().backColor
     }
 }
