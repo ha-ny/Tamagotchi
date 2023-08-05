@@ -66,10 +66,8 @@ extension PopupViewController{
         pop_View.layer.cornerRadius = 10
         pop_TextView.backgroundColor = InfoTamagotchi.backColor
         pop_TextView.textColor = InfoTamagotchi.boldFontColor
-        pop_NameLabel.font = pop_NameLabel.font.withSize(13)
-  
-        
-        pop_NameLabel.font = pop_NameLabel.font.withSize(14)
+        pop_NameLabel.font = .systemFont(ofSize: 13)
+        pop_NameLabel.font = .systemFont(ofSize: 13)
         pop_NameLabel.textColor = InfoTamagotchi.boldFontColor
         pop_NameLabel.layer.borderWidth = 1
         pop_NameLabel.layer.borderColor = InfoTamagotchi.boldFontColor.cgColor

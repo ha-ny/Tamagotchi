@@ -35,7 +35,7 @@ class PickCollectionViewCell: UICollectionViewCell {
     func designLabel(){
         let boldFontColor = UIColor(red: 77/255, green: 106/255, blue: 120/255, alpha: 1)
         
-        pickNameLabel.font = pickNameLabel.font.withSize(13)
+        pickNameLabel.font = .systemFont(ofSize: 13)
         pickNameLabel.layer.borderWidth = 1
         pickNameLabel.layer.borderColor = boldFontColor.cgColor
         pickNameLabel.layer.cornerRadius = 4

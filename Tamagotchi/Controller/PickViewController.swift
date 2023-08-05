@@ -26,7 +26,6 @@ class PickViewController: UIViewController {
     }
 }
 
-
 extension PickViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

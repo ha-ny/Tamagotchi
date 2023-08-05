@@ -41,9 +41,6 @@ extension ChangeNameViewController{
         view.backgroundColor = InfoTamagotchi.backColor
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClick))
-        navigationItem.rightBarButtonItem?.tintColor = InfoTamagotchi.boldFontColor
-        navigationController?.navigationBar.tintColor = InfoTamagotchi.boldFontColor
-        
         nameTextField.backgroundColor = InfoTamagotchi.backColor
         nameTextField.textColor = InfoTamagotchi.boldFontColor
         nameTextField.placeholder = "대장님의 이름이 궁금해요!"
