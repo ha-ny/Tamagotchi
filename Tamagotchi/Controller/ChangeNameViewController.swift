@@ -15,7 +15,6 @@ class ChangeNameViewController: UIViewController {
         super.viewDidLoad()
         designSetting()
         title = "대장님 이름 정하기"
-        //TextField Foucs
         nameTextField.becomeFirstResponder()
     }
     
@@ -29,9 +28,7 @@ class ChangeNameViewController: UIViewController {
             alertShow(title: "알림", message: "이름은 2글자 이상 6글자 이하로 입력해주세요")
         }
     }
-    
-    
-    
+
     @IBAction func endTextField(_ sender: UITextField) {
     }
 }
@@ -58,8 +55,8 @@ extension ChangeNameViewController{
                 self.navigationController?.popViewController(animated: true)
             }
         }
-        alert.addAction(ok)
         
+        alert.addAction(ok)
         present(alert, animated: true)
     }
 }

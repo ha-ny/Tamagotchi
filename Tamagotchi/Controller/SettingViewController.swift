@@ -13,6 +13,7 @@ class SettingViewController: UIViewController{
     
     let identifierSettingCell = "SettingViewControllerCell"
     let identifierChangeName = "ChangeNameViewController"
+    let identifierPickView = "PickViewController"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,11 +66,24 @@ extension SettingViewController{
     }
     
     func pickViewShow(){
-        print(#function, "ddddddddddd")
+
+        let sb = UIStoryboard(name: "Pick", bundle: nil)
+        let vc = sb.instantiateViewController(identifier: identifierPickView) as! PickViewController
+        vc.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func alertDateReset(){
-        print(#function, "ddddddddddd")
+      
+        let alert = UIAlertController(title: "데이터 초기화", message: "정말 다시 처음부터 시작하실 건가요?", preferredStyle: .alert)
+
+        let ok = UIAlertAction(title: "확인", style: .default)
+        let cancle = UIAlertAction(title: "취소", style: .cancel)
+        alert.addAction(ok)
+        alert.addAction(cancle)
+        present(alert, animated: true)
+        
+        //데이터 초기화하기!
     }
 }
 

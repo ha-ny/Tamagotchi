@@ -40,7 +40,9 @@ class PopupViewController: UIViewController {
         let vc = sb.instantiateViewController(identifier: "MainViewController") as! MainViewController
         let nav = UINavigationController(rootViewController: vc)
 
-        UserDefaults.standard.set(true, forKey: "isLaunched")
+        if UserDefaults.standard.bool(forKey: "isLaunched") == false{
+            UserDefaults.standard.set(true, forKey: "isLaunched")
+        }
         
         if UserDefaults.standard.string(forKey: "name") == nil{
             UserDefaults.standard.set("대장님", forKey: "name")
