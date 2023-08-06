@@ -47,9 +47,11 @@ class PopupViewController: UIViewController {
         }
         
         if UserDefaults.standard.string(forKey: "name") == nil{
-            UserDefaults.standard.set("대장님", forKey: "name")
+            UserDefaults.standard.set("대장", forKey: "name")
         }
-
+        
+        UserDefaults.standard.set(pop_Name, forKey: "character")
+        
         sceneDelegate?.window?.rootViewController = nav
         sceneDelegate?.window?.makeKeyAndVisible()
     }

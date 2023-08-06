@@ -39,8 +39,14 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource{
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingViewControllerCell")!
         cell.imageView?.image = data.image
+        
         cell.textLabel?.text = data.title
-        cell.detailTextLabel?.text = data.detail
+        if let _ = data.detail{
+            cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "name")
+        }else{
+            cell.detailTextLabel?.text = ""
+        }
+
         cell.detailTextLabel?.textColor = InfoTamagotchi.boldFontColor
         cell.tintColor = InfoTamagotchi.boldFontColor
         cell.backgroundColor = InfoTamagotchi.backColor
@@ -75,13 +81,30 @@ extension SettingViewController{
       
         let alert = UIAlertController(title: "데이터 초기화", message: "정말 다시 처음부터 시작하실 건가요?", preferredStyle: .alert)
 
-        let ok = UIAlertAction(title: "확인", style: .default)
+        let ok = UIAlertAction(title: "확인", style: .default){_ in
+            self.okReset()
+        }
         let cancle = UIAlertAction(title: "취소", style: .cancel)
         alert.addAction(ok)
         alert.addAction(cancle)
         present(alert, animated: true)
+    }
+    
+    func okReset(){
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDelegate = windowScene?.delegate as? SceneDelegate
+        let sb = UIStoryboard(name: "Pick", bundle: nil)
+        let vc = sb.instantiateViewController(identifier: PickViewController.identifier) as! PickViewController
+        let nav = UINavigationController(rootViewController: vc)
+
+        UserDefaults.standard.set(false, forKey: "isLaunched")
+        UserDefaults.standard.set(nil, forKey: "name")
+        UserDefaults.standard.set(nil, forKey: "character")
+        UserDefaults.standard.set(nil, forKey: "rice")
+        UserDefaults.standard.set(nil, forKey: "water")
         
-        //데이터 초기화하기!
+        sceneDelegate?.window?.rootViewController = nav
+        sceneDelegate?.window?.makeKeyAndVisible()
     }
 }
 

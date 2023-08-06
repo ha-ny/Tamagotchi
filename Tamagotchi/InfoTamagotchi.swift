@@ -8,6 +8,8 @@
 import UIKit
 
 //Tamagotchi 프로젝트 Info
+//UserDefaults
+//name, character, rice, water
 struct InfoTamagotchi{
     
     static let backColor = UIColor(red: 245/255, green: 252/255, blue: 252/255, alpha: 1)
@@ -39,8 +41,27 @@ struct InfoTamagotchi{
     }
     
     static let menuList = [
-        DataMenu(image: UIImage(systemName: "pencil")!, title: "내 이름 설정하기", detail: UserDefaults.standard.string(forKey: "name"), swichFunc: .changeName),
+        DataMenu(image: UIImage(systemName: "pencil")!, title: "내 이름 설정하기", detail: "name", swichFunc: .changeName),
         DataMenu(image: UIImage(systemName: "moon.fill")!, title: "다마고치 변경하기", detail: nil, swichFunc: .pickViewShow),
         DataMenu(image: UIImage(systemName: "arrow.clockwise")!, title: "데이터 초기화", detail: nil, swichFunc: .alertDateReset)
     ]
+    
+    func tamagotchiSay() -> String{
+        let name = UserDefaults.standard.string(forKey: "name")!
+        
+        let messageTamagotchi = [
+            "쉬고싶어요! \(name)님.. 살려주세요",
+           "\(name)님 배고파요",
+           "\(name)님 밥주세요!",
+            "혹시 제가 뚱뚱해보세요? \(name)님을 보니 마음이 놓여요 ㅎ(조크)ㅎ",
+           "\(name)님 저는 잘 자라고 있어요",
+           "\(name)님 오늘도 좋은 하루 보내세요",
+            "사실 저는 더러운 다마고치랍니다. \(name)님 샤워시설을 만들어주세요",
+           "\(name)님 운동 하세요",
+           "할 말이 없어요...\(name)님 저는 수줍은 다마고치인가봐요",
+            "아직 배가 안고파요..\(name)님 많이 드세요"
+       ]
+        
+        return messageTamagotchi.randomElement()!
+    }
 }
