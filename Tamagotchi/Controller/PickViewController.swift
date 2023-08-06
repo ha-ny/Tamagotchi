@@ -40,13 +40,15 @@ extension PickViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let data = InfoTamagotchi.characterTamagotchi[indexPath.row]
-        let vc = storyboard?.instantiateViewController(identifier: PopupViewController.identifier) as! PopupViewController
-        vc.modalPresentationStyle = .overFullScreen
-        vc.pop_Image = data.image
-        vc.pop_Name = data.name
-        vc.pop_Introduce = data.introduce + "\n레벨이 오를 수록 성장하는 걸 볼 수 있어\n10레벨이 되면 어른이 된거야"
-        present(vc, animated: true)
+        if indexPath.row < 3{
+            let data = InfoTamagotchi.characterTamagotchi[indexPath.row]
+            let vc = storyboard?.instantiateViewController(identifier: PopupViewController.identifier) as! PopupViewController
+            vc.modalPresentationStyle = .overFullScreen
+            vc.pop_Image = data.image
+            vc.pop_Name = data.name
+            vc.pop_Introduce = data.introduce + "\n레벨이 오를 수록 성장하는 걸 볼 수 있어\n10레벨이 되면 어른이 된거야"
+            present(vc, animated: true)
+        }
     }
 }
 

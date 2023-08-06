@@ -130,6 +130,12 @@ extension MainViewController{
         waterTextField.keyboardType = .numberPad
         riceEatButton.setImage(UIImage(systemName: "leaf.circle"), for: .normal)
         waterEatButton.setImage(UIImage(systemName: "drop.circle"), for: .normal)
+        riceEatButton.setTitleColor(InfoTamagotchi.boldFontColor, for: .normal)
+        waterEatButton.setTitleColor(InfoTamagotchi.boldFontColor, for: .normal)
+        riceEatButton.setTitleColor(InfoTamagotchi.boldFontColor, for: .highlighted)
+        waterEatButton.setTitleColor(InfoTamagotchi.boldFontColor, for: .highlighted)
+        riceEatButton.tintColor = InfoTamagotchi.boldFontColor
+        waterEatButton.tintColor = InfoTamagotchi.boldFontColor
         riceEatButton.setTitle("밥먹기", for: .normal)
         waterEatButton.setTitle("물먹기", for: .normal)
         riceEatButton.layer.borderColor = InfoTamagotchi.boldFontColor.cgColor
