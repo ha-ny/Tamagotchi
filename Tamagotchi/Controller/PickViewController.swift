@@ -11,8 +11,6 @@ class PickViewController: UIViewController {
     
     @IBOutlet var pickCollectionView: UICollectionView!
 
-    static let identifier = "PickViewController"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,7 +31,7 @@ extension PickViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = pickCollectionView.dequeueReusableCell(withReuseIdentifier: PickCollectionViewCell.identifier, for: indexPath) as! PickCollectionViewCell
+        guard let cell = pickCollectionView.dequeueReusableCell(withReuseIdentifier: PickCollectionViewCell.identifier, for: indexPath) as? PickCollectionViewCell else { return UICollectionViewCell() }
         cell.settingView(indexPath.row)
         return cell
     }
@@ -41,8 +39,8 @@ extension PickViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if indexPath.row < 3{
-            let data = InfoTamagotchi.characterTamagotchi[indexPath.row]
-            let vc = storyboard?.instantiateViewController(identifier: PopupViewController.identifier) as! PopupViewController
+            let data = TamagotchiCharacterSetting.characterTamagotchi[indexPath.row]
+            guard let vc = storyboard?.instantiateViewController(identifier: PopupViewController.identifier) as? PopupViewController else { return }
             vc.modalPresentationStyle = .overFullScreen
             vc.pop_Image = data.image
             vc.pop_Name = data.name
@@ -56,7 +54,7 @@ extension PickViewController{
 
     func designController(){
 
-        view.backgroundColor = InfoTamagotchi.backColor
+        view.backgroundColor = UIColor.backColor
 
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 10
@@ -67,6 +65,6 @@ extension PickViewController{
         layout.minimumInteritemSpacing = spacing
         layout.scrollDirection = .vertical
         pickCollectionView.collectionViewLayout = layout
-        pickCollectionView.backgroundColor = InfoTamagotchi.backColor
+        pickCollectionView.backgroundColor = .backColor
     }
 }

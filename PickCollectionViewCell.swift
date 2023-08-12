@@ -11,9 +11,7 @@ class PickCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet var pickimageView: UIImageView!
     @IBOutlet var pickNameLabel: UILabel!
-    
-    static let identifier = "PickCollectionViewCell"
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         designLabel()
@@ -27,18 +25,17 @@ class PickCollectionViewCell: UICollectionViewCell {
             return
         }
         
-        let data = InfoTamagotchi.characterTamagotchi[indexRow]
+        let data = TamagotchiCharacterSetting.characterTamagotchi[indexRow]
         pickNameLabel.text = data.name
         pickimageView.image = data.image
     }
     
     func designLabel(){
-        let boldFontColor = UIColor(red: 77/255, green: 106/255, blue: 120/255, alpha: 1)
-        
+
         pickNameLabel.font = .systemFont(ofSize: 13)
         pickNameLabel.layer.borderWidth = 1
-        pickNameLabel.layer.borderColor = boldFontColor.cgColor
+        pickNameLabel.layer.borderColor = UIColor.boldFontColor.cgColor
         pickNameLabel.layer.cornerRadius = 4
-        pickNameLabel.textColor = boldFontColor
+        pickNameLabel.textColor = .boldFontColor
     }
 }

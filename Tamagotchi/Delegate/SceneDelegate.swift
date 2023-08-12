@@ -16,17 +16,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: scene)
         
-        let isLaunched = UserDefaults.standard.bool(forKey: "isLaunched")
+        let isLaunched = UserDefaults.standard.bool(forKey: InfoTamagotchi.UserDefaultsKey.isLaunched.rawValue)
         
         if isLaunched{
             let sb = UIStoryboard(name: "Main", bundle: nil)
-            let vc = sb.instantiateViewController(identifier: "MainViewController") as! MainViewController
+            guard let vc = sb.instantiateViewController(identifier: "MainViewController") as? MainViewController else { return }
             let nav = UINavigationController(rootViewController: vc)
             window.rootViewController = nav
         }else{
             //다마고치를 고르지 않은 상태(처음)
             let sb = UIStoryboard(name: "Pick", bundle: nil)
-            let vc = sb.instantiateViewController(identifier: "PickViewController") as! PickViewController
+            guard let vc = sb.instantiateViewController(identifier: "PickViewController") as? PickViewController else { return }
             window.rootViewController = vc
         }
         

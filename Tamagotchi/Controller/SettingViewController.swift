@@ -10,9 +10,7 @@ import UIKit
 class SettingViewController: UIViewController{
 
     @IBOutlet var settingTableView: UITableView!
-    
-    static let identifier = "SettingViewController"
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         designSetting()
@@ -23,38 +21,38 @@ class SettingViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        settingTableView.reloadData()
+        settingTableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
     }
 }
 
 extension SettingViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return InfoTamagotchi.menuList.count
+        return TamagotchiMenu.menuList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let data = InfoTamagotchi.menuList[indexPath.row]
+        let data = TamagotchiMenu.menuList[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingViewControllerCell")!
         cell.imageView?.image = data.image
         
         cell.textLabel?.text = data.title
         if let _ = data.detail{
-            cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: "name")
+            cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: InfoTamagotchi.UserDefaultsKey.name.rawValue)
         }else{
             cell.detailTextLabel?.text = ""
         }
 
-        cell.detailTextLabel?.textColor = InfoTamagotchi.boldFontColor
-        cell.tintColor = InfoTamagotchi.boldFontColor
-        cell.backgroundColor = InfoTamagotchi.backColor
+        cell.detailTextLabel?.textColor = .boldFontColor
+        cell.tintColor = .boldFontColor
+        cell.backgroundColor = .backColor
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch InfoTamagotchi.menuList[indexPath.row].swichFunc{
+        switch TamagotchiMenu.menuList[indexPath.row].swichFunc{
         case .changeName: changeName()
         case .pickViewShow: pickViewShow()
         case .alertDateReset: alertDateReset()
@@ -65,14 +63,14 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource{
 extension SettingViewController{
     
     func changeName(){
-        let vc = storyboard?.instantiateViewController(identifier: ChangeNameViewController.identifier) as! ChangeNameViewController
+        guard let vc = storyboard?.instantiateViewController(identifier: ChangeNameViewController.identifier) as? ChangeNameViewController else { return }
         navigationController?.pushViewController(vc, animated: true)
     }
     
     func pickViewShow(){
 
         let sb = UIStoryboard(name: "Pick", bundle: nil)
-        let vc = sb.instantiateViewController(identifier: PickViewController.identifier) as! PickViewController
+        guard let vc = sb.instantiateViewController(identifier: PickViewController.identifier) as? PickViewController else { return }
         vc.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -94,15 +92,13 @@ extension SettingViewController{
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         let sceneDelegate = windowScene?.delegate as? SceneDelegate
         let sb = UIStoryboard(name: "Pick", bundle: nil)
-        let vc = sb.instantiateViewController(identifier: PickViewController.identifier) as! PickViewController
+        guard let vc = sb.instantiateViewController(identifier: PickViewController.identifier) as? PickViewController else { return }
         let nav = UINavigationController(rootViewController: vc)
 
-        UserDefaults.standard.set(false, forKey: "isLaunched")
-        UserDefaults.standard.set(nil, forKey: "name")
-        UserDefaults.standard.set(nil, forKey: "character")
-        UserDefaults.standard.set(nil, forKey: "rice")
-        UserDefaults.standard.set(nil, forKey: "water")
-        
+        for key in UserDefaults.standard.dictionaryRepresentation().keys {
+            UserDefaults.standard.removeObject(forKey: key.description)
+        }
+
         sceneDelegate?.window?.rootViewController = nav
         sceneDelegate?.window?.makeKeyAndVisible()
     }
@@ -111,12 +107,12 @@ extension SettingViewController{
 extension SettingViewController{
     
     func designSetting(){
-        view.backgroundColor = InfoTamagotchi.backColor
+        view.backgroundColor = .backColor
         
-        navigationController?.navigationBar.tintColor = InfoTamagotchi.boldFontColor
+        navigationController?.navigationBar.tintColor = .boldFontColor
         navigationController?.navigationBar.topItem?.title = ""
         
-        settingTableView.backgroundColor = InfoTamagotchi.backColor
-        settingTableView.layer.borderColor = InfoTamagotchi.boldFontColor.cgColor
+        settingTableView.backgroundColor = .backColor
+        settingTableView.layer.borderColor = UIColor.boldFontColor.cgColor
     }
 }

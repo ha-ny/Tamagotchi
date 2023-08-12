@@ -21,6 +21,9 @@
 		3F2C8AC72A7D1BCE00BBE09B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2C8AC62A7D1BCE00BBE09B /* MainViewController.swift */; };
 		3F2C8AC92A7D23C900BBE09B /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2C8AC82A7D23C900BBE09B /* SettingViewController.swift */; };
 		3F2C8AD02A7E7C4800BBE09B /* ChangeNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2C8ACF2A7E7C4800BBE09B /* ChangeNameViewController.swift */; };
+		3F568E212A87E3C6002A7A2E /* ExtensionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F568E202A87E3C6002A7A2E /* ExtensionView.swift */; };
+		3F568E232A87ED23002A7A2E /* TamagotchiCharacterSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F568E222A87ED23002A7A2E /* TamagotchiCharacterSetting.swift */; };
+		3F568E262A87EDCF002A7A2E /* TamagotchiMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F568E252A87EDCF002A7A2E /* TamagotchiMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,9 @@
 		3F2C8AC62A7D1BCE00BBE09B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Tamagotchi/Controller/MainViewController.swift; sourceTree = SOURCE_ROOT; };
 		3F2C8AC82A7D23C900BBE09B /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingViewController.swift; path = Tamagotchi/Controller/SettingViewController.swift; sourceTree = SOURCE_ROOT; };
 		3F2C8ACF2A7E7C4800BBE09B /* ChangeNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeNameViewController.swift; path = Tamagotchi/Controller/ChangeNameViewController.swift; sourceTree = SOURCE_ROOT; };
+		3F568E202A87E3C6002A7A2E /* ExtensionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionView.swift; path = Tamagotchi/Info/ExtensionView.swift; sourceTree = SOURCE_ROOT; };
+		3F568E222A87ED23002A7A2E /* TamagotchiCharacterSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TamagotchiCharacterSetting.swift; sourceTree = "<group>"; };
+		3F568E252A87EDCF002A7A2E /* TamagotchiMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TamagotchiMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +82,7 @@
 				3F2C8ABB2A7CD0E200BBE09B /* PickCollectionViewCell */,
 				3F2C8ACC2A7E497700BBE09B /* Storyboard */,
 				3F2C8ACE2A7E49DB00BBE09B /* Controller */,
-				3F2C8AC02A7CD81A00BBE09B /* InfoTamagotchi.swift */,
+				3F568E272A87EE22002A7A2E /* Info */,
 				3F2C8AA92A7CCD8D00BBE09B /* Assets.xcassets */,
 				3F2C8AAB2A7CCD8D00BBE09B /* LaunchScreen.storyboard */,
 				3F2C8AAE2A7CCD8D00BBE09B /* Info.plist */,
@@ -121,6 +127,17 @@
 				3F2C8ACF2A7E7C4800BBE09B /* ChangeNameViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		3F568E272A87EE22002A7A2E /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				3F2C8AC02A7CD81A00BBE09B /* InfoTamagotchi.swift */,
+				3F568E252A87EDCF002A7A2E /* TamagotchiMenu.swift */,
+				3F568E222A87ED23002A7A2E /* TamagotchiCharacterSetting.swift */,
+				3F568E202A87E3C6002A7A2E /* ExtensionView.swift */,
+			);
+			path = Info;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,8 +218,11 @@
 				3F2C8AB52A7CCEF200BBE09B /* PickViewController.swift in Sources */,
 				3F2C8AA12A7CCD8C00BBE09B /* AppDelegate.swift in Sources */,
 				3F2C8AA32A7CCD8C00BBE09B /* SceneDelegate.swift in Sources */,
+				3F568E262A87EDCF002A7A2E /* TamagotchiMenu.swift in Sources */,
 				3F2C8AC92A7D23C900BBE09B /* SettingViewController.swift in Sources */,
+				3F568E212A87E3C6002A7A2E /* ExtensionView.swift in Sources */,
 				3F2C8AD02A7E7C4800BBE09B /* ChangeNameViewController.swift in Sources */,
+				3F568E232A87ED23002A7A2E /* TamagotchiCharacterSetting.swift in Sources */,
 				3F2C8AC32A7CEA7300BBE09B /* PopupViewController.swift in Sources */,
 				3F2C8AC72A7D1BCE00BBE09B /* MainViewController.swift in Sources */,
 			);

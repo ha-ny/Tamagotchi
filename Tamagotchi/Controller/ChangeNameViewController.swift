@@ -10,9 +10,7 @@ import UIKit
 class ChangeNameViewController: UIViewController {
     
     @IBOutlet var nameTextField: UITextField!
-    
-    static let identifier = "ChangeNameViewController"
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         designSetting()
@@ -22,7 +20,7 @@ class ChangeNameViewController: UIViewController {
     
     @objc func saveButtonClick(){
         if  6 >= nameTextField.text!.count && nameTextField.text!.count >= 2{
-            UserDefaults.standard.set(nameTextField.text, forKey: "name")
+            UserDefaults.standard.set(nameTextField.text, forKey: InfoTamagotchi.UserDefaultsKey.name.rawValue)
             view.endEditing(true)
             alertShow(title: "성공", message: "\(nameTextField.text!)\n다마고치는 기억력이 좋답니다", isExit: true)
         }else
@@ -38,11 +36,11 @@ class ChangeNameViewController: UIViewController {
 extension ChangeNameViewController{
     
     func designSetting(){
-        view.backgroundColor = InfoTamagotchi.backColor
+        view.backgroundColor = .backColor
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClick))
-        nameTextField.backgroundColor = InfoTamagotchi.backColor
-        nameTextField.textColor = InfoTamagotchi.boldFontColor
+        nameTextField.backgroundColor = .backColor
+        nameTextField.textColor = .backColor
         nameTextField.placeholder = "대장님의 이름이 궁금해요!"
     }
     

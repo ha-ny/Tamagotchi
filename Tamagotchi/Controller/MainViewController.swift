@@ -20,9 +20,7 @@ class MainViewController: UIViewController{
     @IBOutlet var waterTextField: UITextField!
     @IBOutlet var riceEatButton: UIButton!
     @IBOutlet var waterEatButton: UIButton!
-    
-    static let identifier = "MainViewController"
-    
+
     override func viewDidLoad(){
         super.viewDidLoad()
         designSetting()
@@ -31,19 +29,21 @@ class MainViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let name = UserDefaults.standard.string(forKey: "name")!
-        title = "\(name)님의 다마고치"
+        if let name = UserDefaults.standard.string(forKey: InfoTamagotchi.UserDefaultsKey.name.rawValue){
+            title = "\(name)님의 다마고치"
+        }
         
-        dataSetting()
+        ricerEat()
+        waterEat()
     }
 
     @IBAction func riceEatButtonClick(_ sender: UIButton) {
-        eatButtonClick(kind: "rice")
+        eatButtonClick(kind: InfoTamagotchi.UserDefaultsKey.rice.rawValue)
         riceTextField.text = ""
     }
     
     @IBAction func waterEatButtonClick(_ sender: UIButton) {
-        eatButtonClick(kind: "water")
+        eatButtonClick(kind: InfoTamagotchi.UserDefaultsKey.water.rawValue)
         waterTextField.text = ""
     }
     
@@ -51,30 +51,30 @@ class MainViewController: UIViewController{
 
         var num = 0
         
-        if kind == "rice"{
+        if kind == InfoTamagotchi.UserDefaultsKey.rice.rawValue{
             num = Int(riceTextField.text ?? "") ?? 1
             
             if num < 100{
-                dataSetting(newRice: num)
+                ricerEat(newRice: num)
                 return
             }
         }else{
             num = Int(waterTextField.text ?? "") ?? 1
             
             if num < 59{
-                dataSetting(newWater: num)
+                waterEat(newWater: num)
                 return
             }
         }
         
-        let alert = UIAlertController(title: "알림", message: "\(kind == "rice" ? "밥알" : "물방울")이 너무 많아요...우웩", preferredStyle: .alert)
+        let alert = UIAlertController(title: "알림", message: "\(kind == InfoTamagotchi.UserDefaultsKey.rice.rawValue ? "밥알" : "물방울")이 너무 많아요...우웩", preferredStyle: .alert)
         let ok = UIAlertAction(title: "확인", style: .default)
         alert.addAction(ok)
         present(alert, animated: true)
     }
 
     @objc func profileButtonClick(){
-        let vc = storyboard?.instantiateViewController(identifier: SettingViewController.identifier) as! SettingViewController
+        guard let vc = storyboard?.instantiateViewController(identifier: SettingViewController.identifier) as? SettingViewController else { return }
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -88,26 +88,33 @@ class MainViewController: UIViewController{
 extension MainViewController{
     
     func characterSetting(characterLevel: Int){
-        let characterName = UserDefaults.standard.string(forKey: "character")!
-        for (index, Tamagotchi) in InfoTamagotchi.characterTamagotchi.enumerated(){
-            if Tamagotchi.name == characterName{
-                characterImageView.image = UIImage(named: "\(index + 1)-\(characterLevel == 10 ? 9 : characterLevel)")
-                characterNameLabel.text = Tamagotchi.name
+        if let characterName = UserDefaults.standard.string(forKey: InfoTamagotchi.UserDefaultsKey.character.rawValue){
+            for (index, Tamagotchi) in TamagotchiCharacterSetting.characterTamagotchi.enumerated(){
+                if Tamagotchi.name == characterName{
+                    characterImageView.image = UIImage(named: "\(index + 1)-\(characterLevel == 10 ? 9 : characterLevel)")
+                    characterNameLabel.text = Tamagotchi.name
+                }
             }
         }
     }
     
-    func dataSetting(newRice: Int = 0, newWater: Int = 0){
-
-        var rice = UserDefaults.standard.integer(forKey: "rice")
-        var water = UserDefaults.standard.integer(forKey: "water")
+    func ricerEat(newRice: Int = 0){
+        var rice = UserDefaults.standard.integer(forKey: InfoTamagotchi.UserDefaultsKey.rice.rawValue)
         rice += newRice
+        UserDefaults.standard.set(rice, forKey: InfoTamagotchi.UserDefaultsKey.rice.rawValue)
+    }
+    
+    func waterEat(newWater: Int = 0){
+        var water = UserDefaults.standard.integer(forKey: InfoTamagotchi.UserDefaultsKey.water.rawValue)
         water += newWater
-        
-        UserDefaults.standard.set(rice, forKey: "rice")
-        UserDefaults.standard.set(water, forKey: "water")
+        UserDefaults.standard.set(water, forKey: InfoTamagotchi.UserDefaultsKey.water.rawValue)
+    }
+    func levelSetting(riceData: Int?, waterData: Int?){
 
-        var level = (rice/5)+(water/2) / 10
+        let rice = riceData ??  UserDefaults.standard.integer(forKey: InfoTamagotchi.UserDefaultsKey.rice.rawValue)
+        let water = waterData ??  UserDefaults.standard.integer(forKey: InfoTamagotchi.UserDefaultsKey.water.rawValue)
+
+        var level = ((rice/5)+(water/2)) / 10
         
         if level < 1{
             level = 1
@@ -117,12 +124,12 @@ extension MainViewController{
         
         characterSetting(characterLevel: level)
         characterDataLabel.text = "LV\(level) · 밥알 \(rice)개 · 물방울 \(water)개 "
-        messageLabel.text = InfoTamagotchi().tamagotchiSay()
+        messageLabel.text = TamagotchiCharacterSetting.tamagotchiSay()
     }
     
     func designSetting(){
-        
-        view.backgroundColor = InfoTamagotchi.backColor
+    
+        view.backgroundColor = .backColor
         bubbleImageView.image = UIImage(named: "bubble")
         riceTextField.placeholder = "밥주세용"
         waterTextField.placeholder = "물주세용"
@@ -130,29 +137,29 @@ extension MainViewController{
         waterTextField.keyboardType = .numberPad
         riceEatButton.setImage(UIImage(systemName: "leaf.circle"), for: .normal)
         waterEatButton.setImage(UIImage(systemName: "drop.circle"), for: .normal)
-        riceEatButton.setTitleColor(InfoTamagotchi.boldFontColor, for: .normal)
-        waterEatButton.setTitleColor(InfoTamagotchi.boldFontColor, for: .normal)
-        riceEatButton.setTitleColor(InfoTamagotchi.boldFontColor, for: .highlighted)
-        waterEatButton.setTitleColor(InfoTamagotchi.boldFontColor, for: .highlighted)
-        riceEatButton.tintColor = InfoTamagotchi.boldFontColor
-        waterEatButton.tintColor = InfoTamagotchi.boldFontColor
+        riceEatButton.setTitleColor(.boldFontColor, for: .normal)
+        waterEatButton.setTitleColor(.boldFontColor, for: .normal)
+        riceEatButton.setTitleColor(.boldFontColor, for: .highlighted)
+        waterEatButton.setTitleColor(.boldFontColor, for: .highlighted)
+        riceEatButton.tintColor = .boldFontColor
+        waterEatButton.tintColor = .boldFontColor
         riceEatButton.setTitle("밥먹기", for: .normal)
         waterEatButton.setTitle("물먹기", for: .normal)
-        riceEatButton.layer.borderColor = InfoTamagotchi.boldFontColor.cgColor
-        waterEatButton.layer.borderColor = InfoTamagotchi.boldFontColor.cgColor
+        riceEatButton.layer.borderColor = UIColor.boldFontColor.cgColor
+        waterEatButton.layer.borderColor = UIColor.boldFontColor.cgColor
         riceEatButton.layer.borderWidth = 0.5
         waterEatButton.layer.borderWidth = 0.5
         riceEatButton.layer.cornerRadius = 5
         waterEatButton.layer.cornerRadius = 5
-        characterNameLabel.textColor = InfoTamagotchi.boldFontColor
-        characterNameLabel.layer.borderColor = InfoTamagotchi.boldFontColor.cgColor
+        characterNameLabel.textColor = .boldFontColor
+        characterNameLabel.layer.borderColor = UIColor.boldFontColor.cgColor
         characterNameLabel.layer.borderWidth = 0.5
         characterNameLabel.layer.cornerRadius = 5
-        characterDataLabel.textColor = InfoTamagotchi.boldFontColor
-        riceEatButton.titleLabel?.textColor = InfoTamagotchi.boldFontColor
+        characterDataLabel.textColor = .boldFontColor
+        riceEatButton.titleLabel?.textColor = .boldFontColor
         
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.crop.circle"), style: .plain, target: self, action: #selector(profileButtonClick))
-        navigationItem.rightBarButtonItem?.tintColor = InfoTamagotchi.boldFontColor
+        navigationItem.rightBarButtonItem?.tintColor = .boldFontColor
     }
 }
