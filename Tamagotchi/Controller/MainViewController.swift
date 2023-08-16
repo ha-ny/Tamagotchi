@@ -46,25 +46,32 @@ class MainViewController: UIViewController{
     
     func eatButtonClick(kind: String){
 
-        var num = 0
+        var count = 0
+        var message = ""
         
         if kind == InfoTamagotchi.UserDefaultsKey.rice.rawValue{
-            num = Int((riceTextField.text ?? "")) ?? 1
+            count = Int((riceTextField.text ?? "")) ?? 1
+           
             
-            if num < 100{
-                ricerEat(newRice: num)
+            if count < 100{
+                ricerEat(newRice: count)
                 return
+            }else{
+                message = "밥알은 100개 이하"
             }
         }else{
-            num = Int(waterTextField.text ?? "") ?? 1
+            count = Int(waterTextField.text ?? "") ?? 1
+
             
-            if num < 59{
-                waterEat(newWater: num)
+            if count < 60{
+                waterEat(newWater: count)
                 return
+            }else{
+                message = "물은 60개 이하"
             }
         }
         
-        let alert = UIAlertController(title: "알림", message: "\(kind == InfoTamagotchi.UserDefaultsKey.rice.rawValue ? "밥알" : "물방울")이 너무 많아요...우웩", preferredStyle: .alert)
+        let alert = UIAlertController(title: "알림", message: "\(message)로 주세요\n토할거 같아요...우웩", preferredStyle: .alert)
         let ok = UIAlertAction(title: "확인", style: .default)
         alert.addAction(ok)
         present(alert, animated: true)
@@ -114,10 +121,9 @@ extension MainViewController{
         let rice = riceData ??  UserDefaults.standard.integer(forKey: InfoTamagotchi.UserDefaultsKey.rice.rawValue)
         let water = waterData ??  UserDefaults.standard.integer(forKey: InfoTamagotchi.UserDefaultsKey.water.rawValue)
 
-        print(#function, rice, water)
         var level = (rice/5)+(water/2)
         level /= 10
-        print(level)
+        
         if level < 1{
             level = 1
         }else if level > 10{

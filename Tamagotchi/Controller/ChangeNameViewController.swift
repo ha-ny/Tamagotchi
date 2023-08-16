@@ -7,6 +7,11 @@
 
 import UIKit
 
+enum textCount: Error{
+    case towOrMore
+    case sixOrUnder
+}
+
 class ChangeNameViewController: UIViewController {
     
     @IBOutlet var nameTextField: UITextField!
@@ -18,14 +23,29 @@ class ChangeNameViewController: UIViewController {
         nameTextField.becomeFirstResponder()
     }
     
+    func errorCheck(_ nameText: String) throws -> String {
+        guard nameText.count <= 6 else{ throw textCount.sixOrUnder }
+        guard nameText.count >= 2 else{ throw textCount.towOrMore }
+        
+        return nameText
+    }
+    
     @objc func saveButtonClick(){
-        if  6 >= nameTextField.text!.count && nameTextField.text!.count >= 2{
-            UserDefaults.standard.set(nameTextField.text, forKey: InfoTamagotchi.UserDefaultsKey.name.rawValue)
+        
+        do {
+            let nameText = try errorCheck(nameTextField.text ?? "")
+            
+            UserDefaults.standard.set(nameText, forKey: InfoTamagotchi.UserDefaultsKey.name.rawValue)
             view.endEditing(true)
-            alertShow(title: "성공", message: "\(nameTextField.text!)\n다마고치는 기억력이 좋답니다", isExit: true)
-        }else
-        {
-            alertShow(title: "알림", message: "이름은 2글자 이상 6글자 이하로 입력해주세요")
+            alertShow(title: "성공", message: "\(nameText)\n다마고치는 기억력이 좋답니다", isExit: true)
+        }
+        catch {
+            switch error{
+            case textCount.towOrMore: alertShow(title: "알림", message: "2글자 이상 입력해주세요")
+            case textCount.sixOrUnder: alertShow(title: "알림", message: "6글자 이하 입력해주세요")
+            default:
+                print("error")
+            }
         }
     }
 
@@ -40,7 +60,7 @@ extension ChangeNameViewController{
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClick))
         nameTextField.backgroundColor = .backColor
-        nameTextField.textColor = .backColor
+        nameTextField.textColor = .boldFontColor
         nameTextField.placeholder = "대장님의 이름이 궁금해요!"
     }
     
