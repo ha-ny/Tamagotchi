@@ -44,8 +44,8 @@ class PopupViewController: UIViewController {
             UserDefaults.standard.set(true, forKey: InfoTamagotchi.UserDefaultsKey.isLaunched.rawValue)
         }
         
-        if let name = UserDefaults.standard.string(forKey: InfoTamagotchi.UserDefaultsKey.name.rawValue){
-            UserDefaults.standard.set("대장", forKey: name)
+        if  UserDefaults.standard.string(forKey: InfoTamagotchi.UserDefaultsKey.name.rawValue) == nil {
+            UserDefaults.standard.set("대장", forKey: InfoTamagotchi.UserDefaultsKey.name.rawValue)
         }
         
         UserDefaults.standard.set(pop_Name, forKey: InfoTamagotchi.UserDefaultsKey.character.rawValue)

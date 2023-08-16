@@ -34,7 +34,7 @@ class PickCollectionViewCell: UICollectionViewCell {
 
         pickNameLabel.font = .systemFont(ofSize: 13)
         pickNameLabel.layer.borderWidth = 1
-        pickNameLabel.layer.borderColor = UIColor.backColor.cgColor
+        pickNameLabel.layer.borderColor = UIColor.boldFontColor.cgColor
         pickNameLabel.layer.cornerRadius = 4
         pickNameLabel.textColor = .boldFontColor
     }

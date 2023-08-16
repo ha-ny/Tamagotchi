@@ -6,11 +6,9 @@
 //
 
 import UIKit
-//riceTextField을
+
 class MainViewController: UIViewController{
 
-    let pickerViewList = Array(1...99)
-    
     @IBOutlet var bubbleImageView: UIImageView!
     @IBOutlet var characterImageView: UIImageView!
     @IBOutlet var messageLabel: UILabel!
@@ -33,8 +31,7 @@ class MainViewController: UIViewController{
             title = "\(name)님의 다마고치"
         }
         
-        ricerEat()
-        waterEat()
+        levelSetting(riceData: nil, waterData: nil)
     }
 
     @IBAction func riceEatButtonClick(_ sender: UIButton) {
@@ -52,7 +49,7 @@ class MainViewController: UIViewController{
         var num = 0
         
         if kind == InfoTamagotchi.UserDefaultsKey.rice.rawValue{
-            num = Int(riceTextField.text ?? "") ?? 1
+            num = Int((riceTextField.text ?? "")) ?? 1
             
             if num < 100{
                 ricerEat(newRice: num)
@@ -102,20 +99,25 @@ extension MainViewController{
         var rice = UserDefaults.standard.integer(forKey: InfoTamagotchi.UserDefaultsKey.rice.rawValue)
         rice += newRice
         UserDefaults.standard.set(rice, forKey: InfoTamagotchi.UserDefaultsKey.rice.rawValue)
+        levelSetting(riceData: rice, waterData: nil)
     }
     
     func waterEat(newWater: Int = 0){
         var water = UserDefaults.standard.integer(forKey: InfoTamagotchi.UserDefaultsKey.water.rawValue)
         water += newWater
         UserDefaults.standard.set(water, forKey: InfoTamagotchi.UserDefaultsKey.water.rawValue)
+        levelSetting(riceData: nil, waterData: water)
     }
+    
     func levelSetting(riceData: Int?, waterData: Int?){
 
         let rice = riceData ??  UserDefaults.standard.integer(forKey: InfoTamagotchi.UserDefaultsKey.rice.rawValue)
         let water = waterData ??  UserDefaults.standard.integer(forKey: InfoTamagotchi.UserDefaultsKey.water.rawValue)
 
-        var level = ((rice/5)+(water/2)) / 10
-        
+        print(#function, rice, water)
+        var level = (rice/5)+(water/2)
+        level /= 10
+        print(level)
         if level < 1{
             level = 1
         }else if level > 10{
