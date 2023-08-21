@@ -27,7 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             //다마고치를 고르지 않은 상태(처음)
             let sb = UIStoryboard(name: "Pick", bundle: nil)
             guard let vc = sb.instantiateViewController(identifier: "PickViewController") as? PickViewController else { return }
-            window.rootViewController = vc
+            window.rootViewController = vc 
         }
         
         window.backgroundColor = .red
@@ -43,8 +43,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
 
     func sceneWillResignActive(_ scene: UIScene) {

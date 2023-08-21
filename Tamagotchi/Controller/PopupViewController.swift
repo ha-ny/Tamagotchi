@@ -42,6 +42,7 @@ class PopupViewController: UIViewController {
 
         if !UserDefaults.standard.bool(forKey: InfoTamagotchi.UserDefaultsKey.isLaunched.rawValue){
             UserDefaults.standard.set(true, forKey: InfoTamagotchi.UserDefaultsKey.isLaunched.rawValue)
+            dailyNotification()
         }
         
         if  UserDefaults.standard.string(forKey: InfoTamagotchi.UserDefaultsKey.name.rawValue) == nil {
@@ -52,6 +53,21 @@ class PopupViewController: UIViewController {
         
         sceneDelegate?.window?.rootViewController = nav
         sceneDelegate?.window?.makeKeyAndVisible()
+    }
+    
+    func dailyNotification(){
+        
+        let content = UNMutableNotificationContent()
+        content.title = "대장님 다마고치를 잊으신건 아니죠?"
+        content.body = "밥과 물을 챙겨주세요!"
+        content.badge = 1
+        
+        //86400초 = 하루
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
+        let request = UNNotificationRequest(identifier: "\(Date())", content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request){ error in
+            print("SceneDelegate erorrrrrrrrr", error)
+        }
     }
 }
 
