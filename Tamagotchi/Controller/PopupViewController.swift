@@ -63,7 +63,7 @@ class PopupViewController: UIViewController {
         content.badge = 1
         
         //86400초 = 하루
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 86400, repeats: true)
         let request = UNNotificationRequest(identifier: "\(Date())", content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request){ error in
             print("SceneDelegate erorrrrrrrrr", error)

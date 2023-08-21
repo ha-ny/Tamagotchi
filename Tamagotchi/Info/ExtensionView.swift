@@ -7,6 +7,22 @@
 
 import UIKit
 
+@IBDesignable
+class EatButton: UIButton{
+
+    @IBInspectable
+    var borderWidth: CGFloat {
+        get{ return layer.borderWidth }
+        set{ layer.borderWidth = newValue }
+    }
+    
+    @IBInspectable
+    var cornerRadius: CGFloat {
+        get{ return layer.cornerRadius }
+        set{ layer.cornerRadius = newValue }
+    }
+}
+
 extension UIViewController{
     static var identifier: String {
         return String(describing: self)

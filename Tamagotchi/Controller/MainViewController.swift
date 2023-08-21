@@ -153,12 +153,6 @@ extension MainViewController{
         waterEatButton.tintColor = .boldFontColor
         riceEatButton.setTitle("밥먹기", for: .normal)
         waterEatButton.setTitle("물먹기", for: .normal)
-        riceEatButton.layer.borderColor = UIColor.boldFontColor.cgColor
-        waterEatButton.layer.borderColor = UIColor.boldFontColor.cgColor
-        riceEatButton.layer.borderWidth = 0.5
-        waterEatButton.layer.borderWidth = 0.5
-        riceEatButton.layer.cornerRadius = 5
-        waterEatButton.layer.cornerRadius = 5
         characterNameLabel.textColor = .boldFontColor
         characterNameLabel.layer.borderColor = UIColor.boldFontColor.cgColor
         characterNameLabel.layer.borderWidth = 0.5
