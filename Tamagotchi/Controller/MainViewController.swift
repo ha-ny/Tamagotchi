@@ -9,6 +9,7 @@ import UIKit
 
 class MainViewController: UIViewController{
 
+    @IBOutlet var eatView: UIView!
     @IBOutlet var bubbleImageView: UIImageView!
     @IBOutlet var characterImageView: UIImageView!
     @IBOutlet var messageLabel: UILabel!
@@ -138,6 +139,8 @@ extension MainViewController{
     func designSetting(){
     
         view.backgroundColor = .backColor
+        eatView.backgroundColor = .backColor
+        
         bubbleImageView.image = UIImage(named: "bubble")
         riceTextField.placeholder = "밥주세용"
         waterTextField.placeholder = "물주세용"
