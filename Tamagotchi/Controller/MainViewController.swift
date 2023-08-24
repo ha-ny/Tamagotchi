@@ -79,8 +79,10 @@ class MainViewController: UIViewController{
     }
 
     @objc func profileButtonClick(){
-        guard let vc = storyboard?.instantiateViewController(identifier: SettingViewController.identifier) as? SettingViewController else { return }
-        navigationController?.pushViewController(vc, animated: true)
+        
+        transition(sbName: "Main", view: SettingViewController.self, transitionType: .push)
+//        guard let vc = storyboard?.instantiateViewController(identifier: SettingViewController.identifier) as? SettingViewController else { return }
+//        navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func keyboardDown(_ sender: UITapGestureRecognizer) {

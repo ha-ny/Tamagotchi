@@ -40,6 +40,7 @@ extension PickViewController: UICollectionViewDataSource, UICollectionViewDelega
         
         if indexPath.row < 3{
             let data = TamagotchiCharacterSetting.characterTamagotchi[indexPath.row]
+
             guard let vc = storyboard?.instantiateViewController(identifier: PopupViewController.identifier) as? PopupViewController else { return }
             vc.modalPresentationStyle = .overFullScreen
             vc.pop_Image = data.image

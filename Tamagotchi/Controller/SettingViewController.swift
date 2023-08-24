@@ -63,16 +63,11 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource{
 extension SettingViewController{
     
     func changeName(){
-        guard let vc = storyboard?.instantiateViewController(identifier: ChangeNameViewController.identifier) as? ChangeNameViewController else { return }
-        navigationController?.pushViewController(vc, animated: true)
+        transition(sbName: "Main", view: ChangeNameViewController.self, transitionType: .push)
     }
     
     func pickViewShow(){
-
-        let sb = UIStoryboard(name: "Pick", bundle: nil)
-        guard let vc = sb.instantiateViewController(identifier: PickViewController.identifier) as? PickViewController else { return }
-        vc.modalPresentationStyle = .fullScreen
-        navigationController?.pushViewController(vc, animated: true)
+        transition(sbName: "Pick", view: PickViewController.self, transitionType: .push)
     }
     
     func alertDateReset(){
@@ -91,6 +86,7 @@ extension SettingViewController{
     func okReset(){
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         let sceneDelegate = windowScene?.delegate as? SceneDelegate
+
         let sb = UIStoryboard(name: "Pick", bundle: nil)
         guard let vc = sb.instantiateViewController(identifier: PickViewController.identifier) as? PickViewController else { return }
         let nav = UINavigationController(rootViewController: vc)

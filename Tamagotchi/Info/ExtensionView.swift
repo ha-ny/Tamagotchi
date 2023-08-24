@@ -27,6 +27,27 @@ extension UIViewController{
     static var identifier: String {
         return String(describing: self)
     }
+    
+    enum TransitionType {
+        case present
+        case presentNavigation
+        case push
+    }
+    
+    func transition<T: UIViewController>(sbName: String, view: T.Type, transitionType: TransitionType) {
+        let sb = UIStoryboard(name: sbName, bundle: nil)
+        guard let vc = sb.instantiateViewController(identifier: String(describing: view)) as? T else { return }
+        
+        switch transitionType {
+        case .present:
+            present(vc, animated: true)
+        case .presentNavigation:
+            let nav = UINavigationController(rootViewController: vc)
+            present(nav, animated: true)
+        case .push:
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 }
 
 extension UIView{
