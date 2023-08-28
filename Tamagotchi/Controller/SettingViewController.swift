@@ -17,11 +17,19 @@ class SettingViewController: UIViewController{
         title = "설정"
         settingTableView.delegate = self
         settingTableView.dataSource = self
+        //changeNameReturnValue(notification: NSNotification())
+        NotificationCenter.default.addObserver(self, selector: #selector(changeNameReturnValue), name: NSNotification.Name("InfoTamagotchi"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         settingTableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+    }
+    
+    @objc func changeNameReturnValue(notification: NSNotification){
+        if let name = notification.userInfo?[InfoTamagotchi.UserDefaultsKey.name.rawValue]{
+            UserDefaults.standard.set(name, forKey: InfoTamagotchi.UserDefaultsKey.name.rawValue)
+        }
     }
 }
 

@@ -15,7 +15,7 @@ enum textCount: Error{
 class ChangeNameViewController: UIViewController {
     
     @IBOutlet var nameTextField: UITextField!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         designSetting()
@@ -35,7 +35,9 @@ class ChangeNameViewController: UIViewController {
         do {
             let nameText = try errorCheck(nameTextField.text ?? "")
             
-            UserDefaults.standard.set(nameText, forKey: InfoTamagotchi.UserDefaultsKey.name.rawValue)
+            NotificationCenter.default.post(name: NSNotification.Name("InfoTamagotchi"), object: nil, userInfo: [InfoTamagotchi.UserDefaultsKey.name
+                .rawValue: nameText])
+            
             view.endEditing(true)
             alertShow(title: "성공", message: "\(nameText)\n다마고치는 기억력이 좋답니다", isExit: true)
         }
@@ -48,7 +50,7 @@ class ChangeNameViewController: UIViewController {
             }
         }
     }
-
+    
     @IBAction func endTextField(_ sender: UITextField) {
     }
 }

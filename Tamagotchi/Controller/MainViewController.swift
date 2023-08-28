@@ -22,6 +22,7 @@ class MainViewController: UIViewController{
 
     override func viewDidLoad(){
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(changeNameReturnValue), name: NSNotification.Name("InfoTamagotchi"), object: nil)
         designSetting()
     }
     
@@ -89,6 +90,11 @@ class MainViewController: UIViewController{
         view.endEditing(true)
     }
     
+    @objc func changeNameReturnValue(notification: NSNotification){
+        if let name = notification.userInfo?[InfoTamagotchi.UserDefaultsKey.name.rawValue]{
+            UserDefaults.standard.set(name, forKey: InfoTamagotchi.UserDefaultsKey.name.rawValue)
+        }
+    }
     
 }
 
